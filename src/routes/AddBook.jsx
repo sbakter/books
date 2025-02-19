@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -70,7 +70,8 @@ function AddBook() {
   /**
    * Handles the form submission to add a new book.
    */
-  function postHandler() {
+  function postHandler(e) {
+    e.preventDefault();
     post('books', book);
   }
 
