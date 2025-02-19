@@ -13,6 +13,10 @@ import {
   Typography,
 } from '@mui/material';
 
+/**
+ * Books component that fetches and displays a list of books.
+ * @returns {JSX.Element} - The rendered component.
+ */
 function Books() {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +27,9 @@ function Books() {
     }
   }, []);
 
-  // TODO: Replace axios with useAxios hook
+  /**
+   * Fetches the list of books from the API.
+   */
   async function getBooks() {
     try {
       const response = await axios.get('http://localhost:3000/books');

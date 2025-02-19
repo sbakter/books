@@ -7,6 +7,7 @@ import Books from './routes/Books';
 import Book from './routes/Book';
 import AddBook from './routes/AddBook';
 
+// Create a custom theme for Material-UI
 const theme = createTheme({
   palette: {
     primary: {
@@ -18,6 +19,10 @@ const theme = createTheme({
   },
 });
 
+/**
+ * Main application component that sets up routing and theming.
+ * @returns {JSX.Element} - The rendered component.
+ */
 function App() {
   const router = createBrowserRouter([
     {

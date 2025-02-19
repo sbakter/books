@@ -13,6 +13,10 @@ import useAxios from '../services/useAxios';
 import { bookGenres } from '../genres';
 import { Stack, Typography } from '@mui/material';
 
+/**
+ * AddBook component that allows users to add a new book.
+ * @returns {JSX.Element} - The rendered component.
+ */
 function AddBook() {
   const { alert, post } = useAxios('http://localhost:3001');
   const [rateValue, setRateValue] = useState(3);
@@ -26,6 +30,10 @@ function AddBook() {
     stars: null,
   });
 
+  /**
+   * Handles changes to the genres select input.
+   * @param {object} event - The change event.
+   */
   const genreChangeHandler = (event) => {
     const { value } = event.target;
     setBook({
@@ -34,6 +42,10 @@ function AddBook() {
     });
   };
 
+  /**
+   * Handles changes to the rating input.
+   * @param {object} event - The change event.
+   */
   const rateChangeHandler = (event) => {
     const { value } = event.target;
     setBook({
@@ -42,6 +54,10 @@ function AddBook() {
     });
   };
 
+  /**
+   * Handles changes to the form inputs.
+   * @param {object} e - The change event.
+   */
   const addBookHandler = (e) => {
     const { name, value, checked, type } = e.target;
     if (type === 'checkbox' && name === 'completed') {
@@ -51,6 +67,9 @@ function AddBook() {
     }
   };
 
+  /**
+   * Handles the form submission to add a new book.
+   */
   function postHandler() {
     post('books', book);
   }
