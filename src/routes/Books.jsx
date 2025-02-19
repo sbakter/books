@@ -12,6 +12,7 @@ import {
   Typography,
   TextField,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import useAxios from '../services/useAxios';
 
 /**
@@ -95,14 +96,20 @@ function Books() {
                     mt: 'auto',
                     pl: 2,
                   }}
-                ></CardActions>
+                >
                   <Rating
                     name="read-only"
                     value={book.stars}
                     readOnly
                     size="small"
                   />
-                  <Button size="small">Learn More</Button>
+                  <Button
+                    size="small"
+                    component={Link}
+                    to={`/book/${book.id}`}
+                  >
+                    Learn More
+                  </Button>
                 </CardActions>
               </Card>
             ))}
