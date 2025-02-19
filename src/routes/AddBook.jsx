@@ -29,6 +29,7 @@ function AddBook() {
     start: null,
     end: null,
     stars: null,
+    img: '',
   });
   const navigate = useNavigate();
 
@@ -74,7 +75,11 @@ function AddBook() {
    */
   async function postHandler(e) {
     e.preventDefault();
-    await post('books', book);
+    const bookWithDefaultImage = {
+      ...book,
+      img: book.img || 'https://via.placeholder.com/150',
+    };
+    await post('books', bookWithDefaultImage);
     navigate('/');
   }
 
