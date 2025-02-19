@@ -12,6 +12,7 @@ import { DateField } from '@mui/x-date-pickers/DateField';
 import useAxios from '../services/useAxios';
 import { bookGenres } from '../genres';
 import { Stack, Typography, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * AddBook component that allows users to add a new book.
@@ -29,6 +30,7 @@ function AddBook() {
     end: null,
     stars: null,
   });
+  const navigate = useNavigate();
 
   /**
    * Handles changes to the genres select input.
@@ -70,9 +72,10 @@ function AddBook() {
   /**
    * Handles the form submission to add a new book.
    */
-  function postHandler(e) {
+  async function postHandler(e) {
     e.preventDefault();
-    post('books', book);
+    await post('books', book);
+    navigate('/');
   }
 
   return (
