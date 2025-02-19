@@ -10,6 +10,7 @@ import {
   Rating,
   Chip,
   Typography,
+  TextField,
 } from '@mui/material';
 import useAxios from '../services/useAxios';
 
@@ -19,6 +20,8 @@ import useAxios from '../services/useAxios';
  */
 function Books() {
   const { data: books, loading: isLoading, get } = useAxios('http://localhost:3000');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredBooks, setFilteredBooks] = useState([]);
 
   useEffect(() => {
     if (!books) {
@@ -26,11 +29,27 @@ function Books() {
     }
   }, []);
 
-  // TODO: Implement search functionality
+  useEffect(() => {
+    if (books) {
+      setFilteredBooks(
+        books.filter((book) =>
+          book.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    }
+  }, [books, searchTerm]);
+
   return (
     <Box sx={{ mx: 'auto', p: 2 }}>
+      <TextField
+        label="Search Books"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       {isLoading && <CircularProgress />}
-      {!isLoading && books && (
+      {!isLoading && filteredBooks && (
         <div>
           <Stack
             sx={{ justifyContent: 'space-around' }}
@@ -39,7 +58,7 @@ function Books() {
             useFlexGap
             flexWrap="wrap"
           >
-            {books.map((book) => (
+            {filteredBooks.map((book) => (
               <Card
                 sx={{
                   display: 'flex',
@@ -76,7 +95,7 @@ function Books() {
                     mt: 'auto',
                     pl: 2,
                   }}
-                >
+                ></CardActions>
                   <Rating
                     name="read-only"
                     value={book.stars}
