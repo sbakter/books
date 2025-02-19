@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import {
   Box,
   Card,
@@ -12,39 +11,26 @@ import {
   Chip,
   Typography,
 } from '@mui/material';
+import useAxios from '../services/useAxios';
 
 /**
  * Books component that fetches and displays a list of books.
  * @returns {JSX.Element} - The rendered component.
  */
 function Books() {
-  const [books, setBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: books, loading: isLoading, get } = useAxios('http://localhost:3000');
 
   useEffect(() => {
-    if (books.length === 0) {
-      getBooks();
+    if (!books) {
+      get('books');
     }
   }, []);
-
-  /**
-   * Fetches the list of books from the API.
-   */
-  async function getBooks() {
-    try {
-      const response = await axios.get('http://localhost:3000/books');
-      setBooks(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   // TODO: Implement search functionality
   return (
     <Box sx={{ mx: 'auto', p: 2 }}>
       {isLoading && <CircularProgress />}
-      {!isLoading && (
+      {!isLoading && books && (
         <div>
           <Stack
             sx={{ justifyContent: 'space-around' }}
