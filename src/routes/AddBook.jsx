@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom';
  * @returns {JSX.Element} - The rendered component.
  */
 function AddBook() {
-  const { alert, post } = useAxios('http://localhost:3001');
+  const { alert, post } = useAxios('http://localhost:3000');
   const [rateValue, setRateValue] = useState(3);
   const [book, setBook] = useState({
     author: '',
@@ -77,7 +77,7 @@ function AddBook() {
     e.preventDefault();
     const bookWithDefaultImage = {
       ...book,
-      img: book.img || 'https://via.placeholder.com/150',
+      img: book.img || 'https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=',
     };
     await post('books', bookWithDefaultImage);
     navigate('/');

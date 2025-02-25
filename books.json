@@ -68,6 +68,19 @@
       "stars": "5",
       "id": 5,
       "img": "https://www.davidjpphillips.com/wp-content/uploads/2023/08/highonlife_copy-195x300.jpg"
+    },
+    {
+      "author": "ABC",
+      "name": "ABC",
+      "genres": [
+        "Thriller",
+        "Romance"
+      ],
+      "completed": true,
+      "start": "01/01/5",
+      "end": "12/12/5",
+      "stars": "5",
+      "id": 6
     }
   ]
 }
