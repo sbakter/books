@@ -103,7 +103,6 @@ function Books() {
                     size="small"
                   />
                   <Button size="small">Learn More</Button>
-                </CardActions>
               </Card>
             ))}
           </Stack>
