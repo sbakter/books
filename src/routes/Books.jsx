@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import useAxios from '../services/useAxios';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Books component that fetches and displays a list of books.
@@ -23,7 +24,7 @@ function Books() {
   const { data: books, loading: isLoading, get } = useAxios('http://localhost:3000');
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBooks, setFilteredBooks] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (!books) {
       get('books');
@@ -39,6 +40,10 @@ function Books() {
       );
     }
   }, [books, searchTerm]);
+
+  const handleViewBook = (id) => {
+    navigate('/book/' + id);
+  };
 
   return (
     <Box sx={{ mx: 'auto', p: 2 }}>
@@ -68,6 +73,7 @@ function Books() {
                   minWidth: 200,
                 }}
                 key={book.name}
+                onClick={() => handleViewBook(book.id)}
               >
                 <CardMedia
                   sx={{ height: 250 }}
